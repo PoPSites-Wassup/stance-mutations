@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\StanceMutations\MutationResolvers;
+namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
+
+use PoPSitesWassup\StanceMutations\MutationResolvers\UpdateStanceMutationResolver;
 
 class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
