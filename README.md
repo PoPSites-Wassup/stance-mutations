@@ -1,4 +1,4 @@
-# Post Mutations
+# Stance Mutations
 
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-code-quality]][link-code-quality]
@@ -10,7 +10,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for stance-mutations
+Adds support for stance mutations
 
 ## Install
 
