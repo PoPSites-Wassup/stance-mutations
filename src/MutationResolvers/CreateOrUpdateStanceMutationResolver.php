@@ -13,12 +13,26 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
      */
     public function execute(array $form_data)
     {
-        // If there's post_id => It's Update
-        // Otherwise => It's Create
-        $customPostID = $form_data[MutationInputProperties::ID];
-        if ($customPostID) {
+        if ($this->isUpdate($form_data)) {
             return $this->update($form_data);
         }
         return $this->create($form_data);
+    }
+
+    public function validateErrors(array $form_data): ?array
+    {
+        if ($this->isUpdate($form_data)) {
+            return $this->validateUpdateErrors($form_data);
+        }
+        return $this->validateCreateErrors($form_data);
+    }
+
+    /**
+     * If there's an "id" entry => It's Update
+     * Otherwise => It's Create
+     */
+    protected function isUpdate(array $form_data): bool
+    {
+        return !empty($form_data[MutationInputProperties::ID]);
     }
 }
