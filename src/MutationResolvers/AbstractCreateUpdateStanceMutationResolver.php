@@ -17,7 +17,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     // Update Post Validation
     protected function validateContent(array &$errors, array $form_data): void
     {
-        if ($form_data['stancetarget']) {
+        if ($form_data['stancetarget'] ?? null) {
             // Check that the referenced post exists
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $referenced = $customPostTypeAPI->getCustomPost($form_data['stancetarget']);
@@ -114,7 +114,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
     //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
     //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
-    //     if ($form_data['stancetarget']) {
+    //     if ($form_data['stancetarget'] ?? null) {
     //         $post_data['menu-order'] = 1;
     //     }
 
