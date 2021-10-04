@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
     protected CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver;
 
     #[Required]
-    public function autowireCreateOrUpdateStanceMutationResolverBridge(
+    final public function autowireCreateOrUpdateStanceMutationResolverBridge(
         CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver,
     ): void {
         $this->createOrUpdateStanceMutationResolver = $createOrUpdateStanceMutationResolver;
