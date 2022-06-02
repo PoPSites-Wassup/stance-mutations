@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
-use PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues;
-use PoP_Module_Processor_TextareaFormInputs;
-use UserStance_Module_Processor_ButtonGroupFormInputs;
-use PoP_UserStance_PostNameUtils;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP_Module_Processor_TextareaFormInputs;
+use PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues;
+use PoP_UserStance_PostNameUtils;
 use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver;
+use UserStance_Module_Processor_ButtonGroupFormInputs;
 
 class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
@@ -38,7 +39,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
     {
         $form_data = parent::getFormData();
 
-        $target = $this->getModuleProcessorManager()->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET]);
+        $target = $this->getComponentProcessorManager()->getComponentProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
         $form_data['stancetarget'] = $target;
 
         return $form_data;
@@ -52,16 +53,16 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
 
     protected function getEditorInput()
     {
-        return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
+        return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    protected function getCategoriesModule()
+    protected function getCategoriesComponent(): ?Component
     {
         if ($this->showCategories()) {
-            return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
+            return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE];
         }
 
-        return parent::getCategoriesModule();
+        return parent::getCategoriesComponent();
     }
 
     protected function showCategories()
